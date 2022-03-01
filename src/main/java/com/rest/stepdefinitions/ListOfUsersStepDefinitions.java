@@ -25,67 +25,86 @@ public class ListOfUsersStepDefinitions {
 	MakeListUserUtils makeListUserObj = new MakeListUserUtils();
 	ListUserResponse responseOutput;
 	ParseResponseUtils parseResponse = new ParseResponseUtils();
-	
+
 	@Given("^user list users for user id \"([^\"]*)\"$")
 	public void listUserDetails(String userID) throws Throwable {
-	   
-		System.out.println("userID >> "+userID);
+
+		System.out.println("userID >> " + userID);
 		response = makeListUserObj.listUser(userID);
-		
-		System.out.println("response > "+response.statusCode());
-		System.out.println("response > "+response.asString());
-		
+
+		System.out.println("response > " + response.statusCode());
+		System.out.println("response > " + response.asString());
+
 		responseOutput = parseResponse.getListUserResponse(response.asString());
 	}
 
 	@Then("^user verifes the following details for user id \"([^\"]*)\"$")
 	public void verifyUser(String userID, DataTable dataTable) throws Throwable {
-	   
-		
-		
+
 		for (final Map<String, String> row : dataTable.asMaps(String.class, String.class)) {
-		
-			
+
 			assertTrue("name mismatch expected " + row.get("name") + " actual " + responseOutput.getName(),
 					row.get("name").equals((responseOutput.getName())));
-			
-			
+
 			assertTrue("username mismatch expected " + row.get("username") + " actual " + responseOutput.getUsername(),
 					row.get("username").equals((responseOutput.getUsername())));
-			
-			
+
 			assertTrue("email mismatch expected " + row.get("email") + " actual " + responseOutput.getEmail(),
 					row.get("email").equals((responseOutput.getEmail())));
-			
-			
-			assertTrue("address-street mismatch expected " + row.get("address-street") + " actual " + responseOutput.getAddress().getStreet(),
+
+			assertTrue(
+					"address-street mismatch expected " + row.get("address-street") + " actual "
+							+ responseOutput.getAddress().getStreet(),
 					row.get("address-street").equals((responseOutput.getAddress().getStreet())));
-		
+
+			assertTrue(
+					"address-suite mismatch expected " + row.get("address-suite") + " actual "
+							+ responseOutput.getAddress().getSuite(),
+					row.get("address-suite").equals((responseOutput.getAddress().getSuite())));
+
+			assertTrue(
+					"address-city mismatch expected " + row.get("address-city") + " actual "
+							+ responseOutput.getAddress().getCity(),
+					row.get("address-city").equals((responseOutput.getAddress().getCity())));
+
+			assertTrue(
+					"address-zipcode mismatch expected " + row.get("address-zipcode") + " actual "
+							+ responseOutput.getAddress().getZipcode(),
+					row.get("address-zipcode").equals((responseOutput.getAddress().getZipcode())));
+
+			assertTrue(
+					"address-geo-lat mismatch expected " + row.get("address-geo-lat") + " actual "
+							+ responseOutput.getAddress().getGeo().getLat(),
+					row.get("address-geo-lat").equals((responseOutput.getAddress().getGeo().getLat())));
+
+			assertTrue(
+					"address-geo-lng mismatch expected " + row.get("address-geo-lng") + " actual "
+							+ responseOutput.getAddress().getGeo().getLat(),
+					row.get("address-geo-lng").equals((responseOutput.getAddress().getGeo().getLng())));
+
+			assertTrue("phone mismatch expected " + row.get("phone") + " actual " + responseOutput.getPhone(),
+					row.get("phone").equals((responseOutput.getPhone())));
+
+			assertTrue("website mismatch expected " + row.get("website") + " actual " + responseOutput.getWebsite(),
+					row.get("website").equals((responseOutput.getWebsite())));
+
+			assertTrue(
+					"company-name mismatch expected " + row.get("company-name") + " actual "
+							+ responseOutput.getCompany().getName(),
+					row.get("company-name").equals((responseOutput.getCompany().getName())));
+
+			assertTrue(
+					"company-catchPhrase mismatch expected " + row.get("company-catchPhrase") + " actual "
+							+ responseOutput.getCompany().getCatchPhrase(),
+					row.get("company-catchPhrase").equals((responseOutput.getCompany().getCatchPhrase())));
+
+			assertTrue(
+					"company-bs mismatch expected " + row.get("company-bs") + " actual "
+							+ responseOutput.getCompany().getBs(),
+					row.get("company-bs").equals((responseOutput.getCompany().getBs())));
+
 		}
-		
-		System.out.println("Name "+ responseOutput.getName());
-		System.out.println("UserName "+ responseOutput.getUsername());
-		System.out.println("Email "+ responseOutput.getEmail());
-		System.out.println("Name "+ responseOutput.getPhone());
-		System.out.println("Name "+ responseOutput.getWebsite());
-		
-		System.out.println("COMPANY -------->>");
-		System.out.println("company Name "+ responseOutput.getCompany().getName());
-		System.out.println("company catchPhrase "+ responseOutput.getCompany().getCatchPhrase());
-		System.out.println("company bs "+ responseOutput.getCompany().getBs());
 
-		
-		System.out.println("ADDRESS -------->>");
-		
-		System.out.println("Address street "+responseOutput.getAddress().getStreet());
-		System.out.println("Address suite "+responseOutput.getAddress().getSuite());
-		System.out.println("Address city "+responseOutput.getAddress().getCity());
-		System.out.println("Address zipcode "+responseOutput.getAddress().getZipcode());
-		System.out.println("Address Lat "+responseOutput.getAddress().getGeo().getLat());
-		System.out.println("Address lng "+responseOutput.getAddress().getGeo().getLng());
-		
-		
 	}
-
 
 }
