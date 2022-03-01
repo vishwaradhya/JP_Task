@@ -21,6 +21,7 @@ public class ListOfUsersStepDefinitions {
 	MakeListUserUtils makeListUserObj = new MakeListUserUtils();
 	ListUserResponse responseOutput;
 	ParseResponseUtils parseResponse = new ParseResponseUtils();
+	private static int statusCode;
 
 	@Given("^user list users for user id \"([^\"]*)\"$")
 	public void listUserDetails(String userID) {
@@ -101,4 +102,20 @@ public class ListOfUsersStepDefinitions {
 
 	}
 
+	@Given("^user get list user with user id \"([^\"]*)\" which is not exists$")
+	public void userNotExists(String userID) {
+
+		response = makeListUserObj.listUser(userID);
+		logger.info("response > " + response.statusCode());
+		logger.info("response > " + response.asString());
+		
+		statusCode =response.getStatusCode(); 
+
+	}
+	
+	@Then("^user verifies the status code for list user as (\\d+)$")
+	public void verifyStatusCodeListUser(int code){
+		assertTrue("Status code mismatch Expected " + code + " Actual is " + statusCode, statusCode == code);
+
+	}
 }
