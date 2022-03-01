@@ -1,5 +1,5 @@
 @jp
-Feature:  Backend Testing Make posts
+Feature:  Backend Testing for Make Comments feature
   
   Background:
   Given social network server is up and running

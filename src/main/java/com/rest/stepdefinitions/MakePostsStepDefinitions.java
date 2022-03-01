@@ -35,11 +35,13 @@ public class MakePostsStepDefinitions {
 
 	@Given("^social network server is up and running$")
 	public void healthCheck() throws Throwable {
+		statusCode = makePostsObj.healthCheck();
 
+		assertTrue("Health check failed ", statusCode == 200);
 	}
 
 	@Given("^user verifies the status code as (\\d+)$")
-	public void verifyStatusCode(int code){
+	public void verifyStatusCode(int code) {
 
 		assertTrue("Status code mismatch Expected " + code + " Actual is " + statusCode, statusCode == code);
 	}

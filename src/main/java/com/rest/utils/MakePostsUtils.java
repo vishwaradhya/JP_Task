@@ -38,4 +38,10 @@ public class MakePostsUtils extends RestImpl {
 
 	}
 
+	public int healthCheck() {
+
+		response = getRequest(PropertiesFile.getPropertyValue(ConfigurationPath.CONFIG_PATH, "BASE_URL"), EndPoints.EMPTY);
+		return response.getStatusCode();
+	}
+
 }
