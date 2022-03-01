@@ -18,7 +18,7 @@ import cucumber.api.DataTable;
 
 public class MakeCommentsUtils extends RestImpl {
 
-	private static Logger logger = LogManager.getLogger(MakePostsUtils.class);
+	private static Logger logger = LogManager.getLogger(MakeCommentsUtils.class);
 	ParseResponseUtils gsonObj = new ParseResponseUtils();
 	Response response;
 	
@@ -27,9 +27,6 @@ public class MakeCommentsUtils extends RestImpl {
 		
 		for (final Map<String, String> row : dataTable.asMaps(String.class, String.class)) {
 
-			System.out.println("row.get(\"id\") "+row.get("id"));
-			System.out.println("row.get(\"postId\") "+ row.get("postId"));
-			System.out.println("row.get(\"name\") "+row.get("name"));
 			MakeCommentRequest makePost = new MakeCommentRequest();
 			makePost.setId(Integer.parseInt(row.get("id")));
 			makePost.setPostId(Integer.parseInt(row.get("postId")));

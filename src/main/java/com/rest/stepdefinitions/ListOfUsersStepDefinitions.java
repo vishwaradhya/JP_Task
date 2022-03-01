@@ -3,11 +3,7 @@ package com.rest.stepdefinitions;
 import com.jayway.restassured.response.Response;
 import com.rest.commonutils.ParseResponseUtils;
 import com.rest.pojos.listusers.ListUserResponse;
-import com.rest.pojos.makeposts.MakePostResponse;
-import com.rest.utils.MakeCommentsUtils;
 import com.rest.utils.MakeListUserUtils;
-import com.rest.utils.MakePostsUtils;
-
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -27,19 +23,17 @@ public class ListOfUsersStepDefinitions {
 	ParseResponseUtils parseResponse = new ParseResponseUtils();
 
 	@Given("^user list users for user id \"([^\"]*)\"$")
-	public void listUserDetails(String userID) throws Throwable {
+	public void listUserDetails(String userID) {
 
-		System.out.println("userID >> " + userID);
 		response = makeListUserObj.listUser(userID);
-
-		System.out.println("response > " + response.statusCode());
-		System.out.println("response > " + response.asString());
+		logger.info("response > " + response.statusCode());
+		logger.info("response > " + response.asString());
 
 		responseOutput = parseResponse.getListUserResponse(response.asString());
 	}
 
 	@Then("^user verifes the following details for user id \"([^\"]*)\"$")
-	public void verifyUser(String userID, DataTable dataTable) throws Throwable {
+	public void verifyUser(String userID, DataTable dataTable) {
 
 		for (final Map<String, String> row : dataTable.asMaps(String.class, String.class)) {
 

@@ -12,12 +12,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 public class MakePostsStepDefinitions {
 
-	private static Logger logger = LogManager.getLogger(MakePostsStepDefinitions.class);
 	private static int statusCode;
 	MakePostsUtils makePostsObj = new MakePostsUtils();
 	private static Response response;
@@ -53,7 +49,7 @@ public class MakePostsStepDefinitions {
 			assertTrue("title mismatch expected " + row.get("title") + " actual " + responseOutput.getUserId(),
 					row.get("title").equals((responseOutput.getTitle())));
 			assertTrue("body mismatch expected " + row.get("body") + " actual " + responseOutput.getBody(),
-					row.get("body").equals((responseOutput.getBody().toString())));
+					row.get("body").equals((responseOutput.getBody())));
 			assertTrue("userid mismatch expected " + row.get("userId") + " actual " + responseOutput.getUserId(),
 					row.get("userId").equals(Integer.toString((responseOutput.getUserId()))));
 			assertTrue("id mismatch expected " + row.get("id") + " actual " + responseOutput.getUserId(),
