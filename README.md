@@ -6,7 +6,13 @@ The “Automation framework is Cucumber using Java with maven build tool” fram
 
 Test execution is carried with Windows 10 machine 
 
-1. Java latest version - 1.8.0\_281
+1. Java version - above 1.7
 1. MAVEN - Apache Maven 3.6.3
 
 
+**How to Run:**
+
+1. Navigate till project where pom.xml and run following comment
+2. mvn clean install
+
+API execution starts and report will be stored under target\cucumberHtmlReport\index.html
